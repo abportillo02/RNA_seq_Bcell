@@ -15,7 +15,7 @@ with open(csv_file, newline='') as f:
         sampleSRR = row.get("run")
 
         if not sampleSRR:
-            print(f"Skipping row with missing SRR: {row}")
+            print(f"Skipping row with missing SRR:{row}")
             continue
 
         srr_prefix = sampleSRR[:6]
@@ -23,7 +23,7 @@ with open(csv_file, newline='') as f:
             prefix = f"{srr_prefix}"
         else:
             prefix = f"{srr_prefix}/0{sampleSRR[-2:]}"
-        print(f"Processing sample: {sampleSRR} with prefix: {prefix}")
+        print(f"Processing sample: {sampleSRR} with prefix:{prefix}")
 
         sample_out_dir = os.path.join(base_out_dir, sampleSRR)
         os.makedirs(sample_out_dir, exist_ok=True)
