@@ -12,7 +12,7 @@ base_out_dir = sys.argv[2]
 with open(csv_file, newline='') as f:
     reader = csv.DictReader(f)
     for row in reader:
-        sampleSRR = row.get("run")
+        sampleSRR = row.get("Run")
 
         if not sampleSRR:
             print(f"Skipping row with missing SRR:{row}")
