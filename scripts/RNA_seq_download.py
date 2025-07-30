@@ -2,6 +2,20 @@ import sys
 import os
 import csv
 
+def sra_prefix(srr):
+    """
+    Returns the correct SRA FTP/Aspera prefix for a given SRR accession.
+    """
+    if len(srr) == 9:
+        # e.g. SRR6286455 -> SRR628/SRR6286455
+        return f"{srr[:6]}/{srr}"
+    elif len(srr) == 10:
+        # e.g. SRR12345678 -> SRR123/008/SRR12345678
+        return f"{srr[:6]}/00{srr[-3:]}/{srr}"
+    else:
+        # fallback for shorter SRRs
+        return f"{srr[:6]}/{srr}"
+
 if len(sys.argv) != 3:
     print("Usage: python download_RNAseq_fastq.py <metadata_csv_file> <output_dir>")
     sys.exit(1)
@@ -9,7 +23,7 @@ if len(sys.argv) != 3:
 csv_file = sys.argv[1]
 base_out_dir = sys.argv[2]
 
-with open(csv_file, newline='') as f:
+with open(csv_file) as f:
     reader = csv.DictReader(f)
     for row in reader:
         sampleSRR = row.get("Run")
@@ -18,11 +32,7 @@ with open(csv_file, newline='') as f:
             print(f"Skipping row with missing SRR:{row}")
             continue
 
-        srr_prefix = sampleSRR[:6]
-        if len(sampleSRR) <= 9:
-            prefix = f"{srr_prefix}"
-        else:
-            prefix = f"{srr_prefix}/0{sampleSRR[-2:]}"
+        prefix = sra_prefix(sampleSRR)
         print(f"Processing sample: {sampleSRR} with prefix:{prefix}")
 
         sample_out_dir = os.path.join(base_out_dir, sampleSRR)
@@ -47,12 +57,12 @@ conda activate /home/abportillo/miniconda3/envs/coh
 
 /home/abportillo/miniconda3/envs/coh/bin/ascp -QT -l 300m -P 33001 -k 1 \\
  -i /home/abportillo/miniconda3/envs/coh/etc/aspera/aspera_bypass_rsa.pem \\
- era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}/{sampleSRR}/{sampleSRR}_1.fastq.gz \\
+ era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_1.fastq.gz \\
  {sample_out_dir}
 
 /home/abportillo/miniconda3/envs/coh/bin/ascp -QT -l 300m -P 33001 -k 1 \\
  -i /home/abportillo/miniconda3/envs/coh/etc/aspera/aspera_bypass_rsa.pem \\
- era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}/{sampleSRR}/{sampleSRR}_2.fastq.gz \\
+ era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_2.fastq.gz \\
  {sample_out_dir}
 
 conda deactivate
@@ -60,5 +70,3 @@ echo "Download completed for {sampleSRR}"
 """)
 
         print(f"Generated script for {sampleSRR}: {script_path}")
-
-        
