@@ -7,15 +7,15 @@ def sra_prefix(srr):
     Returns the correct SRA FTP/Aspera prefix for a given SRR accession.
     """
     if len(srr) == 9:
-        # e.g. SRR6286455 -> SRR628/SRR6286455
-        return f"{srr[:6]}/{srr}"
+        # e.g. SRR6286455 -> SRR628/SRR6286455/SRR6286455
+        return f"{srr[:6]}/{srr}/{srr}"
     elif len(srr) == 10:
-        # e.g. SRR12345678 -> SRR123/008/SRR12345678
-        return f"{srr[:6]}/00{srr[-3:]}/{srr}"
+        # e.g. SRR12345678 -> SRR123/008/SRR12345678/SRR12345678
+        return f"{srr[:6]}/{srr[-3:]}/{srr}/{srr}"
     else:
         # fallback for shorter SRRs
-        return f"{srr[:6]}/{srr}"
-
+        return f"{srr[:6]}/{srr}/{srr}"
+        
 if len(sys.argv) != 3:
     print("Usage: python download_RNAseq_fastq.py <metadata_csv_file> <output_dir>")
     sys.exit(1)
