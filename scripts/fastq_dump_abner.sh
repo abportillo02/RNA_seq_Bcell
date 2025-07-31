@@ -13,10 +13,10 @@
 
 
 
-SRR_LIST=~/scripts/SRR_Acc_List.txt
+SRR_LIST=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/SRR_Acc_List.txt
 
 # Output directory (optional, create if needed)
-OUTDIR=./home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_bcell
+OUTDIR=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_bcell
 mkdir -p "$OUTDIR"
 
 module load SRA-Toolkit
