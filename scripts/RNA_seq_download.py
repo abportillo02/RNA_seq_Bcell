@@ -53,15 +53,15 @@ with open(csv_file) as f:
 #SBATCH --output=dl_{sampleSRR}_%j.log
 
 source /home/abportillo/.bashrc
-conda activate /home/abportillo/miniconda3/envs/coh
+conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
-/home/abportillo/miniconda3/envs/coh/bin/ascp -QT -l 300m -P 33001 -k 1 \\
- -i /home/abportillo/miniconda3/envs/coh/etc/aspera/aspera_bypass_rsa.pem \\
+ascp -QT -l 300m -P 33001 -k 1 \\
+ -i /home/abportillo/.ssh/id_rsa.pub\\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_1.fastq.gz \\
  {sample_out_dir}
 
-/home/abportillo/miniconda3/envs/coh/bin/ascp -QT -l 300m -P 33001 -k 1 \\
- -i /home/abportillo/miniconda3/envs/coh/etc/aspera/aspera_bypass_rsa.pem \\
+ascp -QT -l 300m -P 33001 -k 1 \\
+ -i /home/abportillo/.ssh/id_rsa.pub \\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_2.fastq.gz \\
  {sample_out_dir}
 
