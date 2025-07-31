@@ -58,12 +58,12 @@ conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 ascp -QT -l 300m -P 33001 -k 1 \\
  -i /home/abportillo/.ssh/id_rsa.pub\\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_1.fastq.gz \\
- {sample_out_dir}
+ .
 
 ascp -QT -l 300m -P 33001 -k 1 \\
  -i /home/abportillo/.ssh/id_rsa.pub \\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_2.fastq.gz \\
- {sample_out_dir}
+.
 
 conda deactivate
 echo "Download completed for {sampleSRR}"
