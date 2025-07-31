@@ -7,8 +7,8 @@
 #SBATCH -p all
 #SBATCH --mem=50G
 #SBATCH --time=05:30:00
-#SBATCH --output=dl_{sampleSRR}_%j.log
-# Path to your SRR accession list (one SRR per line)
+
+
 
 
 
