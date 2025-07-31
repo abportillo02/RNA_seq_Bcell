@@ -6,13 +6,11 @@ def sra_prefix(srr):
     """
     Returns the correct SRA FTP/Aspera prefix for a given SRR accession.
     """
-    if len(srr) == 9:
-        # e.g. SRR6286455 -> SRR628/SRR6286455
-        return f"{srr[:6]}/{srr}"
-    elif len(srr) == 10:
-        # e.g. SRR7418140 -> SRR741/140/SRR7418140
-        return f"{srr[:6]}/{srr[-3:]}/{srr}"
+    if len(srr) >= 7:
+        # e.g. SRR123456 -> SRR123/SRR123456/SRR123456
+        return f"{srr[:6]}/{srr}/{srr}"
     else:
+        # fallback for shorter SRRs
         return f"{srr[:6]}/{srr}"
         
 if len(sys.argv) != 3:
