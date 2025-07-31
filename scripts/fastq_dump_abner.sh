@@ -11,11 +11,15 @@
 # Path to your SRR accession list (one SRR per line)
 
 
+
+
 SRR_LIST=~/scripts/SRR_Acc_List.txt
 
 # Output directory (optional, create if needed)
 OUTDIR=./home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_bcell
 mkdir -p "$OUTDIR"
+
+module load SRA-Toolkit
 
 # Loop through each SRR and run fasterq-dump
 while read -r SRR; do
