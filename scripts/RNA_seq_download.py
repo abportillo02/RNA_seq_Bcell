@@ -53,12 +53,12 @@ source /home/abportillo/.bashrc
 conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
 ascp -QT -l 300m -P 33001 -k 1 \\
- -i /home/abportillo/.ssh/id_rsa.pub\\
+ -i /home/abportillo/.ssh/id_rsa\\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_1.fastq.gz \\
  .
 
 ascp -QT -l 300m -P 33001 -k 1 \\
- -i /home/abportillo/.ssh/id_rsa.pub \\
+ -i /home/abportillo/.ssh/id_rsa \\
  era-fasp@fasp.sra.ebi.ac.uk:vol1/fastq/{prefix}_2.fastq.gz \\
 .
 
