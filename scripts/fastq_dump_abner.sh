@@ -7,7 +7,7 @@
 #SBATCH -p all
 #SBATCH --mem=50G
 #SBATCH --time=05:30:00
-
+#SBATCH --output=d1_fastq.log
 
 
 
