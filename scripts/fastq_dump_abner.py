@@ -5,7 +5,7 @@ import csv
 # Input file with SRR list (1 per line or CSV)
 csv_file = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/SRR_Acc_List.txt"
 script_dir = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_dump_abner"
-outdir = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_bcell"
+outdir = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell"
 logdir = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/fastq_dump_abner/logs"
 
 # Make output folders
