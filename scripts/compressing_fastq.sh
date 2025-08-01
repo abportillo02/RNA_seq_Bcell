@@ -13,4 +13,4 @@
 # Directory containing the files
 fastq_compress="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell"
 # Compress all .fastq files in parallel and keep the originals
-find "$fastq_compress" -type f -name "*.fastq" -print0 | xargs -0 -P 4 -n 1 gzip -k
+find "$fastq_compress" -type f -name "*.fastq" -print0 | xargs -0 -P 4 -n 1 gzip -N
