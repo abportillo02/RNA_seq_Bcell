@@ -133,7 +133,7 @@ picard AddOrReplaceReadGroups \
     --RGSM ${sample_name}\
     --SORT_ORDER coordinate
 
- ${java} -Djava.io.tmpdir=/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/temp \
+ ${java} -Djava.io.tmpdir=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/temp \
   -jar /home/abportillo/.conda/envs/mamba_abner_BC/share/picard-3.3.0-0/picard.jar MarkDuplicates \
   --INPUT ${outdir}/${sample_name}_rg_sorted.bam --OUTPUT ${outdir}/${sample_name}_nr_sorted.bam \
  --REMOVE_DUPLICATES true --READ_NAME_REGEX null --METRICS_FILE ${outdir}/${sample_name}_picardStats.txt
