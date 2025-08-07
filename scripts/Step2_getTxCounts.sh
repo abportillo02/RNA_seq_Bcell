@@ -24,8 +24,8 @@ while IFS=" " read -r sample_name path; do
   echo "Creating bash script for sample: $sample_name"
   ## data path
   datapath_Bcell=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample_name}
-  mkdir -p /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell//rnaPreprocess/counts_tx
-  outdir=/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/DCIS/project//rnaPreprocess/counts_tx
+  mkdir -p /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx
+  outdir=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx
   ## make directory for each sample
   mkdir -p ${outdir}/${sample_name}
   ## software
@@ -68,11 +68,11 @@ conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
 #### get TE initiated transcripts: FPKM, TPM
 
-${python} /net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/DCIS/code/getTEtx_fromGeneCodeTx.py \
+${python} /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/getTEtxReadCounts_fromGeneCodeTx.py \
 ${sample_name} \
 ${outdir} \
-/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
-
+# /net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
+/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
 
 #### get Read Counts from stringtie outputs ############################################################################
 
@@ -87,11 +87,11 @@ ${python} ${prepDE_py} -i ${outdir}/${sample_name}/${sample_name}_ballgownGTFinf
 
 ##### get TE initiated transcripts: counts data
 
-${python} /net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/DCIS/code/getTEtxReadCounts_fromGeneCodeTx.py \
+${python} /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/getTEtxReadCounts_fromGeneCodeTx.py \
 ${sample_name} \
 ${outdir} \
-/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
-
+# /net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
+/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
 conda deactivate"
 
   } > ${outdir}/${sample_name}/${sample_name}_rnaGetTxCounts.sh
