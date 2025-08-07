@@ -34,7 +34,7 @@ while IFS=" " read -r sample_name path; do
   bamToBed=/home/abportillo/.conda/envs/mamba_abner_BC/bin/bamToBed
   coverageBed=/home/abportillo/.conda/envs/mamba_abner_BC/bin/coverageBed
   stringtie=/home/abportillo/.conda/envs/mamba_abner_BC/bin/stringtie
-  prepDE_py=/home/abportillo/.conda/envs/mamba_abner_BC/bin/prepDE_py
+  prepDE_py=/home/abportillo/.conda/envs/mamba_abner_BC/bin/prepDE.py
   # annotations
   hg38_transcriptGTF=/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/filtered_gencode_v46_chr_patch_hapl_scaff_annotation.gtf
   # write .sh script for each sample
@@ -76,7 +76,7 @@ ${outdir} \
 #### get Read Counts from stringtie outputs ############################################################################
 
 echo '${sample_name} ${outdir}/${sample_name}/${sample_name}_Gencode_transcripts_ballgown.gtf' > \
-${outdir}/${sample_name}/${sample_name}_ballgownGTFinfo.txtZZ
+${outdir}/${sample_name}/${sample_name}_ballgownGTFinfo.txt
 
 ##### use prepDE_py to get count matrix
 
