@@ -27,7 +27,7 @@ while IFS=" " read -r sample_name path; do
   mkdir -p /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx
   outdir=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx
   ## make directory for each sample
-  # mkdir -p ${outdir}/${sample_name}
+  mkdir -p ${outdir}/${sample_name}
   ## software
   python=/home/abportillo/.conda/envs/mamba_abner_BC/bin/python
   samtools=/home/abportillo/.conda/envs/mamba_abner_BC/bin/samtools
