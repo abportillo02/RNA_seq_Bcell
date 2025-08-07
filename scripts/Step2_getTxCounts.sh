@@ -54,9 +54,9 @@ source /home/abportillo/.bashrc
 conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
 
-# #### get number of aligned reads
-# ${samtools} view -c -F 4 ${datapath_Bcell}/${sample_name}_sorted.bam \
-# > ${outdir}/${sample_name}/num_alignedReads.txt
+#### get number of aligned reads
+${samtools} view -c -F 4 ${datapath_Bcell}/${sample_name}_sorted.bam \
+> ${outdir}/${sample_name}/num_alignedReads.txt
 
 #### transcript level counts ###########################################################################################
 
