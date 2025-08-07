@@ -71,7 +71,7 @@ conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 ${python} /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/getTEtxReadCounts_fromGeneCodeTx.py \
 ${sample_name} \
 ${outdir} \
-  /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
+  /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed
 
 #### get Read Counts from stringtie outputs ############################################################################
 
@@ -89,7 +89,7 @@ ${python} ${prepDE_py} -i ${outdir}/${sample_name}/${sample_name}_ballgownGTFinf
 ${python} /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/getTEtxReadCounts_fromGeneCodeTx.py \
 ${sample_name} \
 ${outdir} \
-  /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/teAnno_round3/Gencode_TE_transcripts.bed
+  /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed
 conda deactivate"
 
   } > ${outdir}/${sample_name}/${sample_name}_rnaGetTxCounts.sh
