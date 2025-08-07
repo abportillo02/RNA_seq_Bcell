@@ -71,7 +71,7 @@ ln -s ${datapath_Bcell}/${sample_name}_2.fastq.gz ${outdir}/${sample_name}_R2.fa
 module unload FastQC/0.11.8
 ### Align reads with STAR:
 ${STAR} --genomeDir /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/filtered_gencode_v46_chr_patch_hapl_scaff_annotation.gtf \
---readFilesIn ${outdir}/${sample_name}_R1.fastq.gz ${outdir}/${sample_name}_R2.fastq.gz \
+--readFilesIn ${datapath_Bcell}/${sample_name}_1.fastq.gz ${datapath_Bcell}/${sample_name}_2.fastq.gz \
 --readFilesCommand zcat \
 --runThreadN 8 \
 --twopassMode Basic \
