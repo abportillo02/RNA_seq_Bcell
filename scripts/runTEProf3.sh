@@ -7,9 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 sample_list=$1
-outdir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/Transcript_finder"
-
-
+outdir="/home/abportillo/github_repo/RNA_seq_bcell/scripts/raw_fastq_bcell/rnaPreprocess/Transcript_finder"
 
 mkdir -p "${outdir}"
 
@@ -18,7 +16,7 @@ while IFS= read -r sample; do
 
   echo "Creating bash script for sample: $sample"
 
-  sample_dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample}"
+  sample_dir="/home/abportillo/github_repo/RNA_seq_bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample}"
 
   {
   echo -e "#!/bin/bash
@@ -38,19 +36,31 @@ source /home/abportillo/.bashrc
 module load Mamba/24.3.0-0
 mamba activate /home/abportillo/.conda/envs/mamba_abner_BC
 
-# rm -f sample_manifest.txt
-find . -maxdepth 1 -name "*.bam" | while read file; do xbase=$(basename $file); sample_name=${xbase/_sorted_nr_sorted.bam/}; echo -e "${sample_name}\tshort\t${xbase}" >> sample_manifest.txt; done
-find . -maxdepth 1 -name "*.tab" | while read file; do xbase=$(basename $file); sample_name=${xbase/_SJ.out.tab/}; echo -e "${sample_name}\tSJ\t${xbase}" >> sample_manifest.txt; done
-find . -maxdepth 1 -name "*.gtf" | while read file; do xbase=$(basename $file); sample_name=${xbase/.gtf/}; echo -e "${sample_name}\tgtf\t${xbase}" >> sample_manifest.txt; done
+rm -f sample_manifest.txt
+find . -maxdepth 1 -name "*.bam" | while read file; do
+  xbase=$(basename $file)
+  sample_name=${xbase/_sorted_nr_sorted.bam/}
+  echo -e "${sample_name}\tshort\t${xbase}" >> sample_manifest.txt
+done
+find . -maxdepth 1 -name "*.tab" | while read file; do
+  xbase=$(basename $file)
+  sample_name=${xbase/_SJ.out.tab/}
+  echo -e "${sample_name}\tSJ\t${xbase}" >> sample_manifest.txt
+done
+find . -maxdepth 1 -name "*.gtf" | while read file; do
+  xbase=$(basename $file)
+  sample_name=${xbase/.gtf/}
+  echo -e "${sample_name}\tgtf\t${xbase}" >> sample_manifest.txt
+done
 
 # Uncomment if you want to reset before running
 # teprof3 -f sample_manifest.txt --reset
 
-teprof3 -f sample_manifest.txt -s 10 -am 1 -as 10 --assemblethread 4 --assemblestrand 1 --assemblejunctionread 2 \\
-  -ps 10 -pt 0.5 -ptn 100 \\
-  -fs 10 -fm 1 --filterintronretention 3 \\
-  --filtermonoexontpm 1 --filterdownstreammate 2 --filterratio 0.5 \\
-  --tacothread 10 \\
+teprof3 -f sample_manifest.txt -s 10 -am 1 -as 10 --assemblethread 4 --assemblestrand 1 --assemblejunctionread 2 \
+  -ps 10 -pt 0.5 -ptn 100 \
+  -fs 10 -fm 1 --filterintronretention 3 \
+  --filtermonoexontpm 1 --filterdownstreammate 2 --filterratio 0.5 \
+  --tacothread 10 \
   -qs 10 --quansamplenumbercon 100 --quanmode 1 --quanreadlength 75
 
 mamba deactivate
