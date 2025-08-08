@@ -48,7 +48,7 @@ while IFS=" " read -r sample_name path; do
 #SBATCH -p all
 #SBATCH --mem=30G
 #SBATCH --time=06:00:00
-#SBATCH --output=${datapath_Bcellless}/${sample_name}_getTxCounts_%j.log\n
+#SBATCH --output=${outdir}/${sample_name}/${sample_name}_getTxCounts_%j.log\n
 
 source /home/abportillo/.bashrc
 conda activate /home/abportillo/.conda/envs/mamba_abner_BC
