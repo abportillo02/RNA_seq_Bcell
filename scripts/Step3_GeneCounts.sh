@@ -18,8 +18,8 @@ while IFS=" " read -r sample_name path; do
   echo "Creating bash script for sample: $sample_name"
   ## data path
   datapath_Bcell=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample_name}
-  mkdir -p /net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/DCIS/project/gene_counts
-  outdir=/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/Abner/DCIS/project/gene_counts
+  mkdir -p /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/gene_counts
+  outdir=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/gene_counts
   ## make directory for each sample
   mkdir -p ${outdir}/${sample_name}
   ## software
@@ -38,7 +38,7 @@ while IFS=" " read -r sample_name path; do
 #SBATCH -p all
 #SBATCH --mem=30G
 #SBATCH --time=06:00:00
-#SBATCH --output=${sample_name}_getGeneCounts_%j.log\n
+#SBATCH --output=${outdir}/${sample_name}_getGeneCounts_%j.log\n
 
 source /home/abportillo/.bashrc
 conda activate /home/abportillo/.conda/envs/mamba_abner_BC
@@ -47,7 +47,7 @@ conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
 ${featureCounts} -B -p --countReadPairs -Q 30 -s 2 -T 8 -a ${hg38_transcriptGTF} \
 -o ${outdir}/${sample_name}/${sample_name}_gene_counts.txt \
-${datapath_DCIS}/${sample_name}_crick_merged.bam ${datapath_DCIS}/${sample_name}_watson_merged.bam
+${datapath_Bcell}/${sample_name}_crick_merged.bam ${datapath_Bcell}/${sample_name}_watson_merged.bam
 
 conda deactivate"
   } > ${outdir}/${sample_name}/${sample_name}_rnaGetGeneCounts.sh
