@@ -34,7 +34,7 @@ while IFS=" " read -r sample_name path; do
   bamToBed=/home/abportillo/.conda/envs/mamba_abner_BC/bin/bamToBed
   coverageBed=/home/abportillo/.conda/envs/mamba_abner_BC/bin/coverageBed
   stringtie=/home/abportillo/.conda/envs/mamba_abner_BC/bin/stringtie
-  prepDE_py=/home/abportillo/.conda/envs/mamba_abner_BC/bin/prepDE_py
+  prepDE_py=/home/abportillo/.conda/envs/mamba_abner_BC/bin/prepDE.py
   # annotations
   hg38_transcriptGTF=/net/nfs-irwrsrchnas01/labs/dschones/bioresearch/qianhui/hg38_2024/hg38_p14/teAnno_round3/filtered_gencode_v46_chr_patch_hapl_scaff_annotation.gtf
   # write .sh script for each sample
@@ -48,7 +48,7 @@ while IFS=" " read -r sample_name path; do
 #SBATCH -p all
 #SBATCH --mem=30G
 #SBATCH --time=06:00:00
-#SBATCH --output=${outdir}/${sample_name}_getTxCounts_%j.log\n
+#SBATCH --output=${datapath_Bcellless}/${sample_name}_getTxCounts_%j.log\n
 
 source /home/abportillo/.bashrc
 conda activate /home/abportillo/.conda/envs/mamba_abner_BC
