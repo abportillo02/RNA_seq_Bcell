@@ -16,7 +16,7 @@ while IFS= read -r sample; do
 
   echo "Creating bash script for sample: $sample"
 
-  sample_dir="/home/abportillo/github_repo/RNA_seq_bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample}"
+  sample_dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/${sample}"
 
   {
   echo -e "#!/bin/bash
