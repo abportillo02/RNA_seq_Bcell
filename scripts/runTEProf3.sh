@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 sample_list=$1
-outdir="/home/abportillo/github_repo/RNA_seq_bcell/scripts/raw_fastq_bcell/rnaPreprocess/Transcript_finder"
+outdir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/Transcript_finder"
 
 mkdir -p "${outdir}"
 
