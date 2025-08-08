@@ -36,35 +36,27 @@ source /home/abportillo/.bashrc
 module load Mamba/24.3.0-0
 mamba activate /home/abportillo/.conda/envs/mamba_abner_BC
 
-rm -f sample_manifest.txt
-find . -maxdepth 1 -name "*.bam" | while read file; do
-  xbase=$(basename $file)
-  sample_name=${xbase/_sorted_nr_sorted.bam/}
-  echo -e "${sample_name}\tshort\t${xbase}" >> sample_manifest.txt
-done
-find . -maxdepth 1 -name "*.tab" | while read file; do
-  xbase=$(basename $file)
-  sample_name=${xbase/_SJ.out.tab/}
-  echo -e "${sample_name}\tSJ\t${xbase}" >> sample_manifest.txt
-done
-find . -maxdepth 1 -name "*.gtf" | while read file; do
-  xbase=$(basename $file)
-  sample_name=${xbase/.gtf/}
-  echo -e "${sample_name}\tgtf\t${xbase}" >> sample_manifest.txt
-done
+# rm -f sample_manifest.txt
+find . -maxdepth 1 -name "*.bam" | while read file; do xbase=\$(basename \$file); sample_name=\${xbase/_sorted_nr_sorted.bam/}; echo -e \"\${sample_name}\tshort\t\${xbase}\" >> sample_manifest.txt; done
+find . -maxdepth 1 -name "*.tab" | while read file; do xbase=\$(basename \$file); sample_name=\${xbase/_SJ.out.tab/}; echo -e \"\${sample_name}\tSJ\t\${xbase}\" >> sample_manifest.txt; done
+find . -maxdepth 1 -name "*.gtf" | while read file; do xbase=\$(basename \$file); sample_name=\${xbase/.gtf/}; echo -e \"\${sample_name}\tgtf\t\${xbase}\" >> sample_manifest.txt; done
 
 # Uncomment if you want to reset before running
 # teprof3 -f sample_manifest.txt --reset
 
-teprof3 -f sample_manifest.txt -s 10 -am 1 -as 10 --assemblethread 4 --assemblestrand 1 --assemblejunctionread 2 \
-  -ps 10 -pt 0.5 -ptn 100 \
-  -fs 10 -fm 1 --filterintronretention 3 \
-  --filtermonoexontpm 1 --filterdownstreammate 2 --filterratio 0.5 \
-  --tacothread 10 \
+teprof3 -f sample_manifest.txt -s 10 -am 1 -as 10 --assemblethread 4 --assemblestrand 1 --assemblejunctionread 2 \\
+  -ps 10 -pt 0.5 -ptn 100 \\
+  -fs 10 -fm 1 --filterintronretention 3 \\
+  --filtermonoexontpm 1 --filterdownstreammate 2 --filterratio 0.5 \\
+  --tacothread 10 \\
   -qs 10 --quansamplenumbercon 100 --quanmode 1 --quanreadlength 75
 
 mamba deactivate
 "
   } > "${outdir}/${sample}_runTEProf3.sh"
 
+  echo "Created script: ${outdir}/${sample}_runTEProf3.sh"
+
 done < "$sample_list"
+
+echo "Finished creating scripts for all samples in $sample_list"
