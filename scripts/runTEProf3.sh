@@ -15,7 +15,7 @@ if [ ! -f "$samples" ]; then
   exit 1
 fi
 
-while IFS=" " read -r sample_name path; do
+while IFS=" " read -r sample_name; do
  
   echo "Creating bash script for sample: $sample_name"
   ## data paths
@@ -66,4 +66,4 @@ mamba deactivate
 
 done < "${samples}"
 
-echo "Finished creating scripts for all samples in $sample_name"
+echo "All sample script files created successfully."
