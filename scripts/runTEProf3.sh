@@ -49,7 +49,7 @@ find . -maxdepth 1 -name "*.tab" | while read file; do xbase=$(basename $file); 
 find . -maxdepth 1 -name "*.gtf" | while read file; do xbase=$(basename $file); sample_name=${xbase/.gtf/}; echo -e "${sample_name}\tgtf\t${xbase}" >> sample_manifest.txt; done
 
 # Uncomment if you want to reset before running
-# teprof3 -f sample_manifest.txt --reset
+teprof3 -f sample_manifest.txt --reset
 
 teprof3 -f sample_manifest.txt -s 10 -am 1 -as 10 --assemblethread 4 --assemblestrand 1 --assemblejunctionread 2 \\
   -ps 10 -pt 0.5 -ptn 100 \
