@@ -2,7 +2,7 @@
 import os
 
 # Fixed paths
-bed_path = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Genecode_TE_transcripts.bed
+bed_path = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Genecode_TE_transcripts.bed"
 counts_base = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx"
 output_base = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/TE_read_counts"
 sample_list_file = "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/sampleNames.txt"  
