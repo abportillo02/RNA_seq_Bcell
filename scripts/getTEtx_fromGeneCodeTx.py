@@ -26,7 +26,7 @@ for sample in samples:
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"{sample}_Gencode_TEs.bed")
 
-   try:
+try:
     with open(gtf_path, "r") as gtf_file, open(out_path, "w") as out_file:
         for line in gtf_file:
             line = line.strip()
