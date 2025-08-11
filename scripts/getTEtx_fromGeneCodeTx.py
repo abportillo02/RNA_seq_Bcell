@@ -26,32 +26,28 @@ for sample in samples:
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"{sample}_Gencode_TEs.bed")
 
-    try:
-        with open(gtf_path, "r") as gtf_file, open(out_path, "w") as out_file:
-            for line in gtf_file:
-                line = line.strip()
-                if not line or line.startswith("#"):
-                    continue
-                fields = line.split()
-                if len(fields) < 12:
-                    continue  # skip malformed lines
-                
-                if fields[2] == "transcript":
-                    # Extract transcript ID from attribute field (12th field)
-                    # Usually something like: transcript_id "XYZ"; ...
-                    attr = fields[11]
-                    tx_id = attr.split('"')[1]
-                    if tx_id in bed_dict:
-                        # Write fields similar to your original script
-                        # line[0] = chrom, [3]=start, [4]=end, [9] is attribute, [6]=strand
-                        out_file.write(
-   out_file.write(
-    f"{fields[0]}\t{fields[3]}\t{fields[4]}\t"
-    f"{gene_id}\t{tx_id}\t{fields[6]}\t"
-    f"{bed_dict[tx_id]}\t{gene_name}\t"
-    f"{gene_type}\t{extra_info}\n"
-)  # <-- This closes the write() call
+   try:
+    with open(gtf_path, "r") as gtf_file, open(out_path, "w") as out_file:
+        for line in gtf_file:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            fields = line.split()
+            if len(fields) < 12:
+                continue  # skip malformed lines
+            
+            if fields[2] == "transcript":
+                # Extract transcript ID from attribute field (12th field)
+                attr = fields[11]
+                tx_id = attr.split('"')[1]
+                if tx_id in bed_dict:
+                    out_file.write(
+                        f"{fields[0]}\t{fields[3]}\t{fields[4]}\t"
+                        f"{gene_id}\t{tx_id}\t{fields[6]}\t"
+                        f"{bed_dict[tx_id]}\t{gene_name}\t"
+                        f"{gene_type}\t{extra_info}\n"
+                    )
+    print(f"Written filtered BED to: {out_path}")
 
-print(f"Written filtered BED to: {out_path}")
-    except FileNotFoundError:
-        print(f"Warning: GTF file not found for sample {sample} at {gtf_path}")
+except FileNotFoundError:
+    print(f"Warning: GTF file not found for sample {sample} at {gtf_path}")
