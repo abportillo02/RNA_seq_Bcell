@@ -45,11 +45,12 @@ for sample in samples:
                         # Write fields similar to your original script
                         # line[0] = chrom, [3]=start, [4]=end, [9] is attribute, [6]=strand
                         out_file.write(
-                            f"{fields[0]}\t{fields[3]}\t{fields[4]}\t"
-                            f"{fields[9].split('\"')[1]}\t{tx_id}\t{fields[6]}\t"
-                            f"{bed_dict[tx_id]}\t{fields[-5].split('\"')[1]}\t"
-                            f"{fields[-3].split('\"')[1]}\t{fields[-1].split('\"')[1]}\n"
-                        )
+    f"{fields[0]}\t{fields[3]}\t{fields[4]}\t"
+    f"{fields[9].split('\"')[1]}\t{tx_id}\t{fields[6]}\t"
+    f"{bed_dict[tx_id]}\t{fields[-5].split('\"')[1]}\t"
+    f"{fields[-3].split('\"')[1]}\t{fields[-1].split('\"')[1]}\n"
+)
+
         print(f"Written filtered BED to: {out_path}")
     except FileNotFoundError:
         print(f"Warning: GTF file not found for sample {sample} at {gtf_path}")
