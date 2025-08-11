@@ -15,7 +15,7 @@ if [ ! -f "$samples" ]; then
   exit 1
 fi
 
-while IFS=" "read -r sample_name path; do
+while IFS=" " read -r sample_name path; do
  
   echo "Creating bash script for sample: $sample_name"
   ## data paths
