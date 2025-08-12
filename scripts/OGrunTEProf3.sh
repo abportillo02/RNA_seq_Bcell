@@ -19,6 +19,8 @@ mamba activate /home/abportillo/.conda/envs/mamba_abner_BC
 teprof3Dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/TEProf3_TEdetect"
 cd ${teprof3Dir}
 
+
+# Create symbolic links to the necessary files
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam.bai .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_SJ.out.tab .
