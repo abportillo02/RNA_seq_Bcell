@@ -7,7 +7,7 @@
 #SBATCH -p all
 #SBATCH --mem=128G
 #SBATCH --time=12:00:00
-#SBATCH --output=teprof3_%j.log
+#SBATCH --output=${teprof3Dir}/teprof3_%j.log
 
 # R1: use --quanreadlength 75
 
@@ -22,6 +22,7 @@ cd ${teprof3Dir}
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam.bai .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_SJ.out.tab .
+
 
 
 # Create sample manifest file
