@@ -23,7 +23,7 @@ mkdir -p bam
 
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam bam/
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam.bai bam/ 
-ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_SJ.out.tab .
+ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_SJ.out.tab bam/
 
 
 
