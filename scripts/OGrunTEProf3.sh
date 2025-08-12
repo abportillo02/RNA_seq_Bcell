@@ -7,7 +7,7 @@
 #SBATCH -p all
 #SBATCH --mem=128G
 #SBATCH --time=12:00:00
-#SBATCH --output=${teprof3Dir}/teprof3_%j.log
+#SBATCH --output=teprof3.log
 
 # R1: use --quanreadlength 75
 
