@@ -28,12 +28,7 @@ rm -f *.bam *.bam.bai *.tab *.gtf sample_manifest.txt
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_sorted_nr_sorted.bam.bai .
 ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/*/*_SJ.out.tab .
-
-# Generate minimal stub GTFs for each BAM sample due to TEProf3 requirement
-for bam in *_sorted_nr_sorted.bam; do
-    sample=${bam/_sorted_nr_sorted.bam/}
-    echo -e "${sample}\tTEProf3\ttranscript\t1\t2\t.\t+\t.\tgene_id \"${sample}_dummy\"; transcript_id \"${sample}_dummy\";" > ${sample}.gtf
-done
+ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx/*/*_Gencode_transcripts_ballgown.gtf .
 
 # get sample_manifest file
 rm sample_manifest.txt
