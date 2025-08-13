@@ -20,7 +20,7 @@ teprof3Dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/r
 cd ${teprof3Dir}
 
 # Clean old links and manifest
-rm -f *.bam *.bam.bai *.tab *.gtf sample_manifest.txt
+# rm -f *.bam *.bam.bai *.tab *.gtf sample_manifest.txt
 
 
 
