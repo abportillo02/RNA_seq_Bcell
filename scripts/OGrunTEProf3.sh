@@ -13,7 +13,7 @@
 
 source /home/abportillo/.bashrc
 module load Mamba/24.3.0-0
-mamba activate  /home/abportillo/miniconda3/envs/teprof_env
+mamba activate /home/abportillo/miniconda3/envs/teprof_env
 
 # Define the directory:
 teprof3Dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/TEProf3_TEdetect"
