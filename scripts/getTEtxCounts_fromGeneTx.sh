@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=filter_gtf
+#SBATCH --job-name=getTEtxCounts_fromGeneTx
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=abportillo@coh.org
 #SBATCH -n 16 # Number of cores
@@ -7,7 +7,7 @@
 #SBATCH -p all
 #SBATCH --mem=150G
 #SBATCH --time=48:00:00
-#SBATCH --output=filter_gtf_%j.out
+#SBATCH --output=getTEtxCounts_fromGeneTx_%j.out
 
 # source activate MyEnv  # if using conda/mamba
 source /home/abportillo/.bashrc
