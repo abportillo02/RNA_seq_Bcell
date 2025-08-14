@@ -1,11 +1,11 @@
 
-     
+
 import sys 
 import os 
 
 sample =sys.argv[1]
 outpath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
-"counts_tx", sample)
+"/counts_tx", sample)
 
 outPath = sys.argv[2]
 outPath = os.path.join(f"{outPath}", sample)
