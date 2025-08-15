@@ -15,4 +15,4 @@ conda activate /home/abportillo/.conda/envs/mamba_abner_BC
 
 
 # Run the Python script
-python /home/abportillo/github_repo/RNA_seq_Bcell/scripts/getTEtxReadCounts_fromGeneCodeTx.py
+python /home/abportillo/github_repo/RNA_seq_Bcell/scripts/getTEtxReadCounts_fromGeneCodeTx.py sampleNames.txt /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/counts_tx 

@@ -23,7 +23,7 @@ for line in input:
 input.close() 
 
 #get tx counts intfo for TE transcripts 
-input = open(f"{outPath}/{sample}_Gencode_transcripts_ballgown.gtf", "r"))
+input = open(f"{outPath}/{sample}_Gencode_transcripts_ballgown.gtf", "r")
 output = open(f"{outPath}/{sample}_Gencode_TEs.bed", "w")
 
 for line in input:
