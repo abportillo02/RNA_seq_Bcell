@@ -3,17 +3,17 @@
 import sys 
 import os 
 
-sample =sys.argv[1]
-outpath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
-"/counts_tx", sample)
+sample = sys.argv[1]
+# outpath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
+#                        "/counts_tx", sample)
 
 outPath = sys.argv[2]
 outPath = os.path.join(f"{outPath}", sample)
 inputPath = sys.argv[3]
 
 dict = {}
-input = open("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed", "r")
-input = open(f"[inputPath]", "r")
+# input = open("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed", "r")
+input = open(inputPath, "r")
 
 for line in input:
     line = line.strip()

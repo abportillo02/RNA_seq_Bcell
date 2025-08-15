@@ -1,12 +1,19 @@
 import sys 
 import os 
 
+# /home/abportillo/github_repo/RNA_seq_Bcell/scripts/sampleNames.txt
 sample = sys.argv[1]
-outPATH = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
-                       "/counts_tx", sample)
+# outPath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
+                    #    "/counts_tx", sample)
 outPath = sys.argv[2]
 outPath = os.path.join(f"{outPath}", f"{sample}")
+inputPath =sys.argv[3]
+
+dict = {}
+# input = open("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed", "r")
 input = open(f"{inputPath}", "r")
+
+
 
 for line in input:
     line = line.strip()
