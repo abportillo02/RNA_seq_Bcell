@@ -3,12 +3,13 @@
 import sys 
 import os 
 
+# /home/abportillo/github_repo/RNA_seq_Bcell/scripts/sampleNames.txt
 sample = sys.argv[1]
 # outpath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
 #                        "/counts_tx", sample)
 
 outPath = sys.argv[2]
-outPath = os.path.join(f"{outPath}", sample)
+# outPath = os.path.join(f"{outPath}", sample)
 inputPath = sys.argv[3]
 
 dict = {}
@@ -23,8 +24,8 @@ for line in input:
 input.close() 
 
 #get tx counts intfo for TE transcripts 
-input = open(f"{outPath}/{sample}_Gencode_transcripts_ballgown.gtf", "r")
-output = open(f"{outPath}/{sample}_Gencode_TEs.bed", "w")
+input = open(f"{outPath}/_Gencode_transcripts_ballgown.gtf", "r")
+output = open(f"{outPath}/_Gencode_TEs.bed", "w")
 
 for line in input:
     line = line.strip()

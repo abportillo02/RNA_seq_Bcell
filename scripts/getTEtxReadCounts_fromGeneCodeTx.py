@@ -6,7 +6,7 @@ sample = sys.argv[1]
 # outPath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
                     #    "/counts_tx", sample)
 outPath = sys.argv[2]
-outPath = os.path.join(f"{outPath}", f"{sample}")
+# outPath = os.path.join(f"{outPath}", f"{sample}")
 inputPath =sys.argv[3]
 
 dict = {}
@@ -23,8 +23,8 @@ for line in input:
 input.close()
 
 # get py script for TE transcripts
-input = open(f"{outPath}/{sample}_transcript_count_matrix.csv", "r")
-output = open(f"{outPath}/{sample}_TEtxs_count_matrix.csv", "w")
+input = open(f"{outPath}/_transcript_count_matrix.csv", "r")
+output = open(f"{outPath}/_TEtxs_count_matrix.csv", "w")
 
 next(input)
 for line in input:
