@@ -27,7 +27,7 @@ with open(sample, "r") as f:
 
 # Loop over samples
 for s in samples:
-   bed_file = os.path.join(outPath, s, f"{s}_Gencode_HERV.bed")
+    bed_file = os.path.join(outPath, s, f"{s}_Gencode_HERV.bed")
 
     input = open(f"/home/abportillo/github_repo/TEProf3/reference/journal.pcbi.1006453.s006", "r")
     output = open(bed_file, "w")
@@ -39,7 +39,8 @@ for s in samples:
             tx_id = line[11].split('"')[1]
             if tx_id in dict.keys():
                 output.write(line[0] + '\t' + line[3] + '\t' + line[4] + '\t' +
-                            line[9].split('"')[1] + '\t' + tx_id + '\t' +
-                            line[6] + "\t" + dict[tx_id] + "\t" +
-                            line[-5].split('"')[1] + '\t' + line[-3].split('"')[1] + '\t' +
-                            line[-1].split('"')[1] + '\n')
+                             line[9].split('"')[1] + '\t' + tx_id + '\t' +
+                             line[6] + "\t" + dict[tx_id] + "\t" +
+                             line[-5].split('"')[1] + '\t' + line[-3].split('"')[1] + '\t' +
+                             line[-1].split('"')[1] + '\n')
+
