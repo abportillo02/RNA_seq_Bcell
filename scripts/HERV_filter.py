@@ -13,44 +13,51 @@ def parse_gtf_attributes(attr_str):
                 print(f"Malformed attribute: {attr}")
     return attrs
 
-# --- Input arguments ---
+# Input arguments
 sample_file = sys.argv[1]      # Path to sampleNames.txt
 outPath = sys.argv[2]          # Output directory
-inputPath = sys.argv[3]        # BED file with transcript annotations
+inputPath = sys.argv[3]        # BED file with TE annotations
 
-# --- Load transcript annotations into dictionary ---
-dict = {}
+# Load BED entries into a coordinate-based dictionary
+coord_dict = {}
 with open(inputPath, "r") as input:
     for line in input:
         line = line.strip().split()
-        if len(line) > 4:
-            dict[line[3]] = line[4]
+        if len(line) >= 5:
+            chrom = line[0]
+            start = line[1]
+            end = line[2]
+            key = (chrom, start, end)
+            coord_dict[key] = {
+                'name': line[3],
+                'annotation': line[4]
+            }
         else:
             print(f"Skipping malformed BED line: {line}")
 
-print(f"Loaded {len(dict)} transcript entries from BED file.")
+print(f"Loaded {len(coord_dict)} coordinate entries from BED file.")
 
-# --- Read sample names ---
+# Read sample names
 with open(sample_file, "r") as f:
     samples = [line.strip() for line in f]
 
 print(f"Found {len(samples)} samples to process.")
 
-# --- Process each sample ---
+# Process each sample
 for s in samples:
     gtf_file = "/home/abportillo/github_repo/TEProf3/reference/HERV.gtf"
     bed_dir = os.path.join(outPath, s)
     bed_file = os.path.join(bed_dir, f"{s}_Gencode_HERVs.bed")
 
-    # Ensure output directory exists
+
     os.makedirs(bed_dir, exist_ok=True)
 
-    # Skip if GTF file doesn't exist
+
     if not os.path.exists(gtf_file):
         print(f"Warning: {gtf_file} not found, skipping {s}.")
         continue
 
-    print(f"\n Processing sample: {s}")
+    print(f"Processing sample: {s}")
     print(f"Writing to: {bed_file}")
 
     written_lines = 0
@@ -62,35 +69,33 @@ for s in samples:
 
             fields = line.strip().split('\t')
             if len(fields) < 9:
-                print(f"Skipping malformed GTF line: {line}")
+
                 continue
 
             feature_type = fields[2]
-            if feature_type != "transcript":
+            if feature_type != "exon":
                 continue
+
+            chrom = fields[0]
+            start = fields[3]
+            end = fields[4]
+            key = (chrom, start, end)
 
             attrs = parse_gtf_attributes(fields[8])
-            tx_id = attrs.get("transcript_id")
-
-            if not tx_id:
-                print(f"Missing transcript_id in line: {line}")
-                continue
-
-            if tx_id in dict:
+            if key in coord_dict:
+                entry = coord_dict[key]
                 output.write('\t'.join([
-                    fields[0],  # chrom
-                    fields[3],  # start
-                    fields[4],  # end
-                    attrs.get("gene_id", "."),  # gene name
-                    tx_id,
-                    fields[6],  # strand
-                    dict[tx_id],
+                    chrom,
+                    start,
+                    end,
+                    entry['name'],
+                    entry['annotation'],
+                    fields[6],  # strand from GTF
                     attrs.get("repName", "."),
                     attrs.get("repClass", "."),
                     attrs.get("repFamily", ".")
                 ]) + '\n')
                 written_lines += 1
-            else:
-                print(f"Transcript ID {tx_id} not found in dict.")
+
 
     print(f"Finished sample {s}: {written_lines} lines written.")
