@@ -30,7 +30,7 @@ with open(sample, "r") as f:
 
 # Loop over samples
 for s in samples:
-    gtf_file = (f"/home/abportillo/github_repo/TEProf3/reference/journal.pcbi.1006453.s006")
+    gtf_file = (f"/home/abportillo/github_repo/TEProf3/reference/HERV.gtf")
     bed_file = os.path.join(outPath, s, f"{s}_Gencode_HERVs.bed")
     
     # skip if gtf file doesn't exist
