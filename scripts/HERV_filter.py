@@ -6,8 +6,11 @@ def parse_gtf_attributes(attr_str):
     attrs = {}
     for attr in attr_str.strip().split(';'):
         if attr.strip():
-            key, value = attr.strip().split(' ', 1)
-            attrs[key] = value.strip('"')
+            try:
+                key, value = attr.strip().split(' ', 1)
+                attrs[key] = value.strip('"')
+            except ValueError:
+                print(f"Malformed attribute: {attr}")
     return attrs
 
 # --- Input arguments ---
@@ -23,11 +26,15 @@ with open(inputPath, "r") as input:
         if len(line) > 4:
             dict[line[3]] = line[4]
         else:
-            print(f"Skipping malformed line: {line}")
+            print(f"Skipping malformed BED line: {line}")
+
+print(f"Loaded {len(dict)} transcript entries from BED file.")
 
 # --- Read sample names ---
 with open(sample_file, "r") as f:
     samples = [line.strip() for line in f]
+
+print(f"Found {len(samples)} samples to process.")
 
 # --- Process each sample ---
 for s in samples:
@@ -40,11 +47,13 @@ for s in samples:
 
     # Skip if GTF file doesn't exist
     if not os.path.exists(gtf_file):
-        print(f"Warning: {gtf_file} not found, skipping.")
+        print(f"Warning: {gtf_file} not found, skipping {s}.")
         continue
 
-    print(f"Processing sample: {s}")
+    print(f"\n Processing sample: {s}")
     print(f"Writing to: {bed_file}")
+
+    written_lines = 0
 
     with open(gtf_file, "r") as input, open(bed_file, "w") as output:
         for line in input:
@@ -53,6 +62,7 @@ for s in samples:
 
             fields = line.strip().split('\t')
             if len(fields) < 9:
+                print(f"Skipping malformed GTF line: {line}")
                 continue
 
             feature_type = fields[2]
@@ -62,7 +72,11 @@ for s in samples:
             attrs = parse_gtf_attributes(fields[8])
             tx_id = attrs.get("transcript_id")
 
-            if tx_id and tx_id in dict:
+            if not tx_id:
+                print(f"Missing transcript_id in line: {line}")
+                continue
+
+            if tx_id in dict:
                 output.write('\t'.join([
                     fields[0],  # chrom
                     fields[3],  # start
@@ -75,5 +89,8 @@ for s in samples:
                     attrs.get("repClass", "."),
                     attrs.get("repFamily", ".")
                 ]) + '\n')
+                written_lines += 1
             else:
                 print(f"Transcript ID {tx_id} not found in dict.")
+
+    print(f"Finished sample {s}: {written_lines} lines written.")
