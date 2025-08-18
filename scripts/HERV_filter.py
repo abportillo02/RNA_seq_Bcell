@@ -1,54 +1,79 @@
+import sys
+import os
 
-import sys 
-import os 
+def parse_gtf_attributes(attr_str):
+    """Parse GTF attribute column into a dictionary."""
+    attrs = {}
+    for attr in attr_str.strip().split(';'):
+        if attr.strip():
+            key, value = attr.strip().split(' ', 1)
+            attrs[key] = value.strip('"')
+    return attrs
 
-# /home/abportillo/github_repo/RNA_seq_Bcell/scripts/sampleNames.txt
-sample = sys.argv[1]
-# outpath = os.path.join("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess"
-#                        "/counts_tx", sample)
+# --- Input arguments ---
+sample_file = sys.argv[1]      # Path to sampleNames.txt
+outPath = sys.argv[2]          # Output directory
+inputPath = sys.argv[3]        # BED file with transcript annotations
 
-outPath = sys.argv[2]
-# outPath = os.path.join(f"{outPath}", sample)
-inputPath = sys.argv[3]
-
+# --- Load transcript annotations into dictionary ---
 dict = {}
-# input = open("/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/hg38_p14/Gencode_TE_transcripts.bed", "r")
-input = open(inputPath, "r")
+with open(inputPath, "r") as input:
+    for line in input:
+        line = line.strip().split()
+        if len(line) > 4:
+            dict[line[3]] = line[4]
+        else:
+            print(f"Skipping malformed line: {line}")
 
-for line in input:
-    line = line.strip()
-    line = line.split()
-    dict[line[3]] = line[4]
-
-input.close() 
-
-#get tx counts intfo for TE transcripts 
-
-# Read sample names from your file
-with open(sample, "r") as f:
+# --- Read sample names ---
+with open(sample_file, "r") as f:
     samples = [line.strip() for line in f]
 
-# Loop over samples
+# --- Process each sample ---
 for s in samples:
-    gtf_file = (f"/home/abportillo/github_repo/TEProf3/reference/HERV.gtf")
-    bed_file = os.path.join(outPath, s, f"{s}_Gencode_HERVs.bed")
-    
-    # skip if gtf file doesn't exist
+    gtf_file = "/home/abportillo/github_repo/TEProf3/reference/HERV.gtf"
+    bed_dir = os.path.join(outPath, s)
+    bed_file = os.path.join(bed_dir, f"{s}_Gencode_HERVs.bed")
+
+    # Ensure output directory exists
+    os.makedirs(bed_dir, exist_ok=True)
+
+    # Skip if GTF file doesn't exist
     if not os.path.exists(gtf_file):
         print(f"Warning: {gtf_file} not found, skipping.")
         continue
 
-    input = open(gtf_file, "r")
-    output = open(bed_file, "w")
-    
-    for line in input:
-        line = line.strip()
-        line = line.split()
-        if line[2] == 'transcript':
-            tx_id = line[11].split('"')[1]
-            if tx_id in dict.keys():
-                output.write(line[0] + '\t' + line[3] + '\t' + line[4] + '\t' +
-                            line[9].split('"')[1] + '\t' + tx_id + '\t' +
-                            line[6] + "\t" + dict[tx_id] + "\t" +
-                            line[-5].split('"')[1] + '\t' + line[-3].split('"')[1] + '\t' +
-                            line[-1].split('"')[1] + '\n')
+    print(f"Processing sample: {s}")
+    print(f"Writing to: {bed_file}")
+
+    with open(gtf_file, "r") as input, open(bed_file, "w") as output:
+        for line in input:
+            if line.startswith("#") or line.strip() == "":
+                continue
+
+            fields = line.strip().split('\t')
+            if len(fields) < 9:
+                continue
+
+            feature_type = fields[2]
+            if feature_type != "transcript":
+                continue
+
+            attrs = parse_gtf_attributes(fields[8])
+            tx_id = attrs.get("transcript_id")
+
+            if tx_id and tx_id in dict:
+                output.write('\t'.join([
+                    fields[0],  # chrom
+                    fields[3],  # start
+                    fields[4],  # end
+                    attrs.get("gene_id", "."),  # gene name
+                    tx_id,
+                    fields[6],  # strand
+                    dict[tx_id],
+                    attrs.get("repName", "."),
+                    attrs.get("repClass", "."),
+                    attrs.get("repFamily", ".")
+                ]) + '\n')
+            else:
+                print(f"Transcript ID {tx_id} not found in dict.")
