@@ -12,7 +12,7 @@
 # R1: use --quanreadlength 75
 
 source /home/abportillo/.bashrc
-conda activate  /home/abportillo/miniconda3/envs/teprof_env
+conda activate /home/abportillo/miniconda3/envs/teprof_env
 
 # Define the directory:
 teprof3Dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/TEProf3_TEdetect"
