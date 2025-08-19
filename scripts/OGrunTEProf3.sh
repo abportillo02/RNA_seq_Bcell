@@ -13,8 +13,7 @@
 
 source /home/abportillo/.bashrc
 conda activate /home/abportillo/miniconda3/envs/teprof_env
-which stringtie
-which samtools
+
 
 # Define the directory:
 teprof3Dir="/home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPreprocess/TEProf3_TEdetect"
