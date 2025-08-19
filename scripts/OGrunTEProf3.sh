@@ -31,9 +31,9 @@ ln -s /home/abportillo/github_repo/RNA_seq_Bcell/scripts/raw_fastq_bcell/rnaPrep
 
 # get sample_manifest file
 rm sample_manifest.txt
-find . -maxdepth 1 -name "*.bam"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/_sorted_nr_sorted.bam/} ; echo -e "\"${sample_name}\"\tshort\t${xbase}" >> sample_manifest.txt; done ;
-find . -maxdepth 1 -name "*.tab"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/_SJ.out.tab/} ; echo -e "\"${sample_name}\"\tSJ\t${xbase}" >> sample_manifest.txt; done ;
-find . -maxdepth 1 -name "*.gtf"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/.gtf/} ; echo -e "\"${sample_name}\"\tgtf\t${xbase}" >> sample_manifest.txt; done
+find . -maxdepth 1 -name "*.bam"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/_sorted_nr_sorted.bam/} ; echo -e "\"${sample_name}\"\t\"short\"\t\"${xbase}\"" >> sample_manifest.txt; done ;
+find . -maxdepth 1 -name "*.tab"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/_SJ.out.tab/} ; echo -e "\"${sample_name}\"\t\"SJ\"\t\"${xbase}\"" >> sample_manifest.txt; done ;
+find . -maxdepth 1 -name "*.gtf"  | while read file ; do xbase=$(basename "$file"); sample_name=${xbase/.gtf/} ; echo -e "\"${sample_name}\"\t\"gtf\"t\"${xbase}"" >> sample_manifest.txt; done
 
 # reset all folders if error log
 teprof3 -f sample_manifest.txt --reset
