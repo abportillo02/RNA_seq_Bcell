@@ -13,7 +13,7 @@
 dir="/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks"
 
 # Path to chromosome sizes file
-chrom_sizes="/home/abportillo/genomes/hg38.chrom.sizes"  # Update if needed
+chrom_sizes="/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks/hg38.chrom.sizes"  # Update if needed
 
 # Loop through each BED file
 for file in "${dir}"/*.bed; do
