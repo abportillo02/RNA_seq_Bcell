@@ -9,8 +9,8 @@
 #SBATCH --time=48:00:00
 #SBATCH --output=bed_to_bigwig.out
 
-for file in /home/abportillo/github_repo/RNA_seq_Bcell/scripts/chip_exo/KLF4/kzfp_peaks/*.bed; do
+for file in /home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks; do
   base=$(basename "$file" .bed)
-  sort -k1,1 -k2,2n "$file" > "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/chip_exo/KLF4/kzfp_peaks/${base}.sorted.bed"
-  bedGraphToBigWig "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/chip_exo/KLF4/kzfp_peaks/${base}.sorted.bed" hg38.chrom.sizes "/home/abportillo/github_repo/RNA_seq_Bcell/scripts/chip_exo/KLF4/kzfp_peaks/${base}.bw"
+  sort -k1,1 -k2,2n "$file" > "/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks${base}.sorted.bed"
+  bedGraphToBigWig "/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks/${base}.sorted.bed" hg38.chrom.sizes "/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/kzfp_peaks/${base}.bw"
 done
