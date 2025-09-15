@@ -7,10 +7,10 @@
 #SBATCH -p all
 #SBATCH --mem=150G
 #SBATCH --time=48:00:00
-#SBATCH --output=/home/abportillo/github_repo/RNA_seq_Bcell/scripts/chip_exo/KLF4/homer_motif.log
+#SBATCH --output=/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/homer_output/homer_motif.log
 
 # === User-defined variables ===
-FASTA_FILE="KZFP519_overlapping_KLF4.fa"
+FASTA_FILE="/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/KZFP519_overlapping_KLF4.fa"
 OUTPUT_DIR="/home/abportillo/github_repo/RNA_seq_Bcell/output/chip_exo/KLF4/homer_output"
 MOTIF_LENGTHS="8,10,12,14"
 NUM_THREADS=4
